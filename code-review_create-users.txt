@@ -1,0 +1,133 @@
+# This is a checklist for testing the program features. 
+# create_user.sh
+
+# SUMMARY
+# - run as root [1]
+# - take command line arguments [1]
+# - create log directory [1]
+# - create log file [1]
+# - create user [1]
+# - create group [1]
+# - ecrypt file [1]
+# - create summary [1]
+
+# Progress [8/8]
+
+[1]run as root
+	+ RULES
+		[x] only root user can run this script
+		[x] error message indicating rule
+	+ TESTS
+		[x] run as regular user
+		[x] run as root user
+[1] take command line arguments
+	[x] help function
+		+ RULES
+			[x] -h
+		+ TESTS
+			[x] -h
+	[x] number of arguments (5)
+		+ RULES
+			[x] exactly 5 arguments	
+		+ TESTS 
+			[x] use less than 5 arguments
+			[x] use more than 5 arguments
+			[x] use exactly 5 argumnets
+	[x] username argument
+		+ RULES
+			[x] must only contain lowercase letters [a-z]
+		+ TESTS
+			[x] use [a-z]
+			[x] use [A-Z]
+			[x] use [0-9]
+			[x] use a symbol
+			[x] use a space
+			[x] use a tab
+	[x] groupname argument
+		+ RULES
+			[x] must only contain lowercase letters [a-z]
+		+ TESTS
+			[x] use [a-z]
+			[x] use [A-Z]
+			[x] use [0-9]
+			[x] use a symbol
+			[x] use a space
+			[x] use a tab
+	[x] number of accounts
+		+ RULES
+			[x] must only contain a numeric value [0-9]
+		+ TESTS
+			[x] use a letter
+			[x] use a symbol
+			[x] use a space
+			[x] use a tab
+	[x] expiry date
+		+ RULES
+			[x] must only contain a numeric value [0-9]
+		+ TESTS
+			[x] use a letter
+			[x] use a symbol
+			[x] use a space
+			[x] use a tab
+	[x] encryption password
+		+ RULES
+			[x] must only contain lowercase letters [a-zA-Z0-9]
+			[] minimum length, 8 characters
+		+ TESTS
+			[x] use [a-z]
+			[x] use [A-Z]
+			[x] use [0-9]
+			[x] use a symbol
+			[x] use a space
+			[x] use a tab			
+[1] create log directory
+	+ RULES
+		[x] directory name: Logs
+		[x] make a log directory in the working directory if it doesn't already exist
+	+ TESTS
+		[x] log directory doesn't exist
+		[x] log directory exists
+[1] create log file
+	+ RULES
+		[x] log name: use script name
+		[x] use log directory
+		[x] append to, if log already exists
+	+ TESTS
+		[x] log file doesn't already exist
+		[x] log file exists						
+[1] create group
+	+ RULES
+		[x] group name = user input
+		[x] create group if it doesn't exist
+	+ TESTS
+		[x] group doesn't exist
+		[x] group with similar name exists
+		[x] group exists
+[1] create user
+	+ RULES
+		[x] new user acccount + home directory = user input
+		[x] assign to group = user input
+		[x] generate + assign password to user
+		[x] pass standard: random, -base64 8, length 10
+		[x] write username + password to file
+	+ TESTS
+		[x] verify /etc/passwd
+		[x] verify /etc/group
+		[x] verify user accounts file for username and password
+		[x] login as user, use ssh to verify username + pass	
+[1] encrypt file
+	+ RULES
+		[x] encrypt user accounts file
+		[x] encryption standard: CAST5
+[1] create summary
+	[x] date
+	[x] username
+	[x] groupname
+	[x] number of accounts
+	[x] expiration date
+	[x] does group exist?
+	[x] user accounts file path
+	[x] log file path
+	[x] correct information written to log file
+
+
