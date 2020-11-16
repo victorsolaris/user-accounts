@@ -62,9 +62,8 @@ for user in $(cut -f 1 -d : /etc/passwd | grep -e ^"$USERNAME*"); do
   banner="\n***** $user ********************************************\n"
   if [[ ! -f "/home/$user/$MINICONDAVERSION" ]]; then
     echo -e "$banner"
-    cp "/root/Downloads/$MINICONDAVERSION" "/home/$user/" 
+    cp "/root/Downloads/$MINICONDAVERSION" "/home/$user/" & 
     echo -e "$MINICONDAVERSION copied to [ $user ]."
   fi;
 done | tee -a "$LOG"
-
 
