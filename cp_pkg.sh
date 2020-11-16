@@ -45,7 +45,7 @@ fi
 LOG="$CURRENTDIR/Logs/$0.log"
 MINICONDAVERSION="Miniconda3-latest-Linux-x86_64.sh"
 echo -e "" > "$LOG"
-echo -e "\nCopying $MINICONDAVERSION account(s). Please wait ...\n" | tee -a "$LOG"
+echo -e "\nCopying $MINICONDAVERSION to account(s). Please wait ...\n" | tee -a "$LOG"
 
 # 	DATE STAMP
 date | tee -a "$LOG"
@@ -59,11 +59,27 @@ fi
 
 #	COPY MINICONDA TO USER
 for user in $(cut -f 1 -d : /etc/passwd | grep -e ^"$USERNAME*"); do
-  banner="\n***** $user ********************************************\n"
   if [[ ! -f "/home/$user/$MINICONDAVERSION" ]]; then
-    echo -e "$banner"
     cp "/root/Downloads/$MINICONDAVERSION" "/home/$user/" & 
     echo -e "$MINICONDAVERSION copied to [ $user ]."
+  fi;
+done | tee -a "$LOG"
+
+#	INSTALL MINICONDA
+for user in $(cut -f 1 -d : /etc/passwd | grep -e ^"$USERNAME*"); do
+  if [[ -f "/home/$user/$MINICONDAVERSION" ]]; then
+    echo -e "Installing $MINICONDAVERSION to [ $user ]."
+    runuser -l "$user" -c 'bash ~/Miniconda3-latest-Linux-x86_64.sh -b' > /dev/null 2>&1 &
+    sleep 10
+  fi;
+done | tee -a "$LOG"
+
+# 	UPDATE MINICONDA
+for user in $(cut -f 1 -d : /etc/passwd | grep -e ^"$USERNAME*"); do
+  if [[ -f "/home/$user/$MINICONDAVERSION" ]]; then
+    echo -e "Updating $MINICONDAVERSION for [ $user ]."
+    runuser -l "$user" -c 'echo "source ~/miniconda3/etc/profile.d/conda.sh" >> ~/.bashrc' > /dev/null 2>&1
+    runuser -l "$user" -c 'echo y | conda update conda' > /dev/null 2>&1 &
   fi;
 done | tee -a "$LOG"
 
