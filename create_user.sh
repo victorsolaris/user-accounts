@@ -1,5 +1,19 @@
 #!/bin/bash
 
+# Victor Solaris
+# November 18, 2020
+# create_user.sh
+
+#	SUMMARY
+# run as root
+# take command line arguments
+# create log directory
+# create log file
+# create group
+# create users
+# encrypt file
+# summary
+
 # 	RUN AS ROOT
 if [[ $(whoami) != 'root' ]]; then 
   echo "Run as root" && exit 1;
@@ -134,7 +148,7 @@ shred -uz "$USERACCOUNTSFILE"
 i=0
 while [ $i -le 0 ] 
 do
-	echo -e "***** SUMMARY ******************************\n"
+	echo -e "\n***** SUMMARY ******************************\n"
 	date
 	echo -e "\nUsername: $USERNAME"
 	echo -e "Groupname: $GROUP"
