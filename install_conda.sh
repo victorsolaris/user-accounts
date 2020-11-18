@@ -2,6 +2,7 @@
 
 # Victor Solaris
 # November 18, 2020
+# install_conda.sh
 
 #	SUMMARY
 # run as root
