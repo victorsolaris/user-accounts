@@ -12,28 +12,26 @@ README.md <br />
 4. Install miniconda on user accounts
 
 
-## create_user.sh
+## +++++ create_user.sh +++++
 
-#	SUMMARY
-- run as root
-- take command line arguments
-- create log directory
-- create log file
-- create group
-- create users
-- encrypt file
-- summary
+1. run as root
+2. take command line arguments
+3. create log directory
+4. create log file
+5. create group
+6. create users
+7. encrypt file
+8. summary
 
-## install_conda.sh
+## +++++ install_conda.sh +++++
 
-#	SUMMARY
-# run as root
-# take command line arguments
-# create log directory
-# create log file
-# log file date stamp
-# download miniconda
-# copy miniconda to user
-# install miniconda
-# update miniconda
+1. run as root
+2. take command line arguments
+3. create log directory
+4. create log file
+5. log file date stamp
+6. download miniconda
+7. copy miniconda to user
+8. install miniconda
+9. update miniconda
 
