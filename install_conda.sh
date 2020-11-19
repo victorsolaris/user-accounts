@@ -9,11 +9,9 @@
 # take command line arguments
 # create log directory
 # create log file
-# log file date stamp
 # download miniconda
 # copy miniconda to user
 # install miniconda
-# update miniconda
 
 #       RUN AS ROOT
 if [[ $(whoami) != 'root' ]]; then
@@ -85,16 +83,4 @@ for user in $(cut -f 1 -d : /etc/passwd | grep -e ^"$USERNAME*"); do
     sleep 10 
   fi;
 done | tee -a "$LOG"
-
-# 	UPDATE MINICONDA
-for user in $(cut -f 1 -d : /etc/passwd | grep -e ^"$USERNAME*"); do
-  if [[ -f "/home/$user/$MINICONDAVERSION" ]]; then
-    echo -e "Updating $MINICONDAVERSION for [ $user ]."
-    runuser -l "$user" -c 'echo "source ~/miniconda3/etc/profile.d/conda.sh" >> ~/.bashrc' > /dev/null 2>&1 &
-    runuser -l "$user" -c 'echo y | conda update conda' > /dev/null 2>&1 &
-    runuser -l "$username" -c 'conda config --add channels bioconda' &
-    runuser -l "$username" -c 'conda config --add channels conda-forge' &
-  fi;
-done | tee -a "$LOG"
-
 
