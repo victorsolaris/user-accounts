@@ -90,8 +90,10 @@ done | tee -a "$LOG"
 for user in $(cut -f 1 -d : /etc/passwd | grep -e ^"$USERNAME*"); do
   if [[ -f "/home/$user/$MINICONDAVERSION" ]]; then
     echo -e "Updating $MINICONDAVERSION for [ $user ]."
-    runuser -l "$user" -c 'echo "source ~/miniconda3/etc/profile.d/conda.sh" >> ~/.bashrc' > /dev/null 2>&1
+    runuser -l "$user" -c 'echo "source ~/miniconda3/etc/profile.d/conda.sh" >> ~/.bashrc' > /dev/null 2>&1 &
     runuser -l "$user" -c 'echo y | conda update conda' > /dev/null 2>&1 &
+    runuser -l "$username" -c 'conda config --add channels bioconda' &
+    runuser -l "$username" -c 'conda config --add channels conda-forge' &
   fi;
 done | tee -a "$LOG"
 
