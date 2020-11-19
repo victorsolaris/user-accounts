@@ -11,7 +11,6 @@ README.md <br />
 4. Write username and password to encrypted file
 4. Install miniconda on user accounts
 
-
 ## +++++ create_user.sh +++++
 
 1. run as root
@@ -34,4 +33,15 @@ README.md <br />
 7. copy miniconda to user
 8. install miniconda
 9. update miniconda
+
+## ++++ delete_user.sh +++++
+
+1. run as root
+2. tak command line arguments
+3. create log directory
+4. create log file
+5. delete user
+6. delete group
+7. delete encrypted file
+8. summary
 
