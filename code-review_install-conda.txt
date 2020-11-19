@@ -1,0 +1,74 @@
+#	CODE REVIEW
+# Victor Solaris
+# November 18, 2020
+# install_conda.sh
+
+#	SUMMARY
+# Progress [0/8]
+# - run as root [1]
+# - take command line arguments [1]
+# - create log directory [1]
+# - create log file [1]
+# - download miniconda []
+# - copy miniconda to user []
+# - install miniconda []
+# - update miniconda []
+
+#	CHECKLIST
+[1] run as root
+	+ RULES
+		[x] only root user can run this script
+		[x] error message indicating rule
+	+ TESTS
+		[x] run as regular user
+		[x] run as root user
+[1] take command line arguments
+	[x] help function
+		+ RULES
+			[x] -h
+		+ TESTS
+			[x] -h
+	[x] number of arguments (3)
+		+ RULES
+			[x] exactly 3 arguments	
+		+ TESTS 
+			[x] use less than 3 arguments
+			[x] use more than 3 arguments
+			[x] use exactly 3 argumnets
+	[x] username argument
+		+ RULES
+			[x] must only contain lowercase letters [a-z]
+		+ TESTS
+			[x] use [a-z]
+			[x] use [A-Z]
+			[x] use [0-9]
+			[x] use a symbol
+			[x] use a space
+			[x] use a tab
+# create log directory
+	+ RULES
+	+ TESTS
+# create log file
+	+ RULES
+	+ TESTS
+# log file date stamp
+	+ RULES
+	+ TESTS
+
+# download miniconda
+	+ RULES
+	+ TESTS
+
+# copy miniconda to user
+	+ RULES
+	+ TESTS
+
+# install miniconda
+	+ RULES
+	+ TESTS
+
+# update miniconda
+	+ RULES
+	+ TESTS
+
+
