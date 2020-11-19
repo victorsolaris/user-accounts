@@ -60,12 +60,12 @@ echo -e "\nUpdating $MINICONDAVERSION for account(s). Please wait ...\n" | tee -
 
 
 # 	UPDATE MINICONDA
-for user in $(cut -f 1 -d : /etc/passwd | grep -e ^"$USERNAME*"); do
+for user in $(cut -f 1 -d : /etc/passwd | grep -w "$USERNAME[0-9]\+$"); do
   if [[ -f "/home/$user/$MINICONDAVERSION" ]]; then
     echo -e "Updating $MINICONDAVERSION for [ $user ]."
     runuser -l "$user" -c 'echo "source ~/miniconda3/etc/profile.d/conda.sh" >> ~/.bashrc'
-    runuser -l "$user" -c 'echo y | conda update conda' > /dev/null 2>&1 &
     runuser -l "$user" -c 'conda config --add channels bioconda'
     runuser -l "$user" -c 'conda config --add channels conda-forge'
+    runuser -l "$user" -c 'echo y | conda update conda' > /dev/null 2>&1 &
   fi;
 done | tee -a "$LOG"
