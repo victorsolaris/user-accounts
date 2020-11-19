@@ -1,13 +1,21 @@
-# 	CODE REVIEW 
+# 	CODE REVIEW
+
+# Victor Solaris
+# November 18, 2020 
 # delete_user.sh
 
 #	 SUMMARY
-# Progress [4/4]
+# Progress [8/8]
 # - run as root [1]
 # - take command line arguments [1]
 # - create log directory [1]
 # - create log file [1]
+# - delete user [1]
+# - delete group [1]
+# - delete encrypted file [1]
+# - summary [1]
 
+#	CHECKLIST
 [1]run as root
 	+ RULES
 		[x] only root user can run this script
@@ -72,7 +80,7 @@
 	+ TESTS
 		[x] log file doesn't already exist
 		[x] log file exists						
-[] delete user
+[1] delete user
 	+ RULES
 		[x] write username to log
 		[x] delete crontabs
@@ -83,4 +91,25 @@
 		[x] verify command manually 
 		[x] verify command manually
 		[x] test grep pattern: dir: del-user-account
-
+[1] delete group
+	+ RULES
+		[x] delete group if it exists
+	+ TESTS
+		[x] stdout if group exists
+		[x] stdout if group does not exist
+[1] delete encrypted file
+	+ RULES
+		[x] rm *.gpg
+	+ TESTS
+		[x] verify working directory
+[1] summary
+	+ RULES
+		[x] user accounts in /etc/passwd
+		[x] group in /etc/group
+		[x] encrypted files in .
+	+ TESTS
+		[x] grep /etc/passwd
+		[x] grep /etc/group
+		[x] find .
+		
+	+ TESTS
