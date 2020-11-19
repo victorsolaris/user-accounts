@@ -4,7 +4,7 @@
 # install_conda.sh
 
 #	SUMMARY
-# Progress [0/8]
+# Progress [4/8]
 # - run as root [1]
 # - take command line arguments [1]
 # - create log directory [1]
@@ -45,16 +45,21 @@
 			[x] use a symbol
 			[x] use a space
 			[x] use a tab
-# create log directory
+[1] create log directory
 	+ RULES
+		[x] directory name: Logs
+		[x] make a log directory in the working directory if it doesn't already exist
 	+ TESTS
-# create log file
+		[x] log directory doesn't exist
+		[x] log directory exists
+[1] create log file
 	+ RULES
+		[x] log name: use script name
+		[x] use log directory
+		[x] append to, if log already exists
 	+ TESTS
-# log file date stamp
-	+ RULES
-	+ TESTS
-
+		[x] log file doesn't already exist
+		[x] log file exists
 # download miniconda
 	+ RULES
 	+ TESTS
