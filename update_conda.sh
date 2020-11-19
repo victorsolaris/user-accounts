@@ -69,5 +69,3 @@ for user in $(cut -f 1 -d : /etc/passwd | grep -e ^"$USERNAME*"); do
     runuser -l "$user" -c 'conda config --add channels conda-forge'
   fi;
 done | tee -a "$LOG"
-
-
