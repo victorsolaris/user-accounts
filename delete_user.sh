@@ -6,11 +6,14 @@
 
 #	SUMMARY
 # run as root
-# take command line arguments 
-# check if there are accounts to be deleted
-# delete user accounts
+# take command line arguments
+# create log directory
+# create log file 
+# check number of accounts to be deleted
+# delete users
 # delete group
 # delete encrypted user accounts/password file
+# summary
 
 #	RUN AS ROOT
 if [[ $(whoami) != 'root' ]]; then
@@ -56,10 +59,8 @@ if ! [[ $MAX =~ $re2 ]]; then
   exit 1
 fi
 
-# find current directory
-CURRENTDIR=$(pwd)
-
 #       CREATE LOG DIRECTORY
+CURRENTDIR=$(pwd)
 LOGDIR=""
 LOGDIREXISTS="$(echo -e "Log directory exists: [ $CURRENTDIR/Logs ]")"
 if [[ ! -d "$CURRENTDIR/Logs/" ]]; then
@@ -67,12 +68,12 @@ if [[ ! -d "$CURRENTDIR/Logs/" ]]; then
   LOGDIR="$(echo -e "Log directory created: [ $CURRENTDIR/Logs/ ]")"
 fi
 
-#	CREATE DATE STAMP ON LOG
+#	CREATE LOG FILE
 LOG="$CURRENTDIR/Logs/$0.log"
 echo -e "\n***********************************************************************" | tee -a "$LOG"
 date | tee -a "$LOG"
 
-# CHECK IF THERE ARE ACCOUNTS TO BE DELETED
+# CHECK NUMBER OF ACCOUNTS TO BE DELETED
 totalaccounts="$(grep -wc "$USERNAME[0-9]*" "/etc/passwd")"
 if [[ $totalaccounts -eq 0 ]];then
   echo -e "\nThere are $totalaccounts  account(s) to be deleted." | tee -a "$LOG"
@@ -82,7 +83,7 @@ else
 fi
 
 
-# DELETE USER ACCOUNTS
+# DELETE USERS
 for (( i=1; i <= MAX; i++  ));do
    if grep -wq "$USERNAME$i" /etc/passwd; then
     
