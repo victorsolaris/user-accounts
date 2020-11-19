@@ -15,7 +15,7 @@
 # - create summary [1]
 
 # 	CHECKLIST
-[1]run as root
+[1] run as root
 	+ RULES
 		[x] only root user can run this script
 		[x] error message indicating rule
