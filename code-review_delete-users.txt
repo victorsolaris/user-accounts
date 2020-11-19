@@ -1,0 +1,86 @@
+# 	CODE REVIEW 
+# delete_user.sh
+
+#	 SUMMARY
+# Progress [4/4]
+# - run as root [1]
+# - take command line arguments [1]
+# - create log directory [1]
+# - create log file [1]
+
+[1]run as root
+	+ RULES
+		[x] only root user can run this script
+		[x] error message indicating rule
+	+ TESTS
+		[x] run as regular user
+		[x] run as root user
+[1] take command line arguments
+	[x] help function
+		+ RULES
+			[x] -h
+		+ TESTS
+			[x] -h
+	[x] number of arguments (3)
+		+ RULES
+			[x] exactly 3 arguments	
+		+ TESTS 
+			[x] use less than 3 arguments
+			[x] use more than 3 arguments
+			[x] use exactly 3 argumnets
+	[x] username argument
+		+ RULES
+			[x] must only contain lowercase letters [a-z]
+		+ TESTS
+			[x] use [a-z]
+			[x] use [A-Z]
+			[x] use [0-9]
+			[x] use a symbol
+			[x] use a space
+			[x] use a tab
+	[x] groupname argument
+		+ RULES
+			[x] must only contain lowercase letters [a-z]
+		+ TESTS
+			[x] use [a-z]
+			[x] use [A-Z]
+			[x] use [0-9]
+			[x] use a symbol
+			[x] use a space
+			[x] use a tab
+	[x] number of accounts
+		+ RULES
+			[x] must only contain a numeric value [0-9]
+		+ TESTS
+			[x] use a letter
+			[x] use a symbol
+			[x] use a space
+			[x] use a tab
+[1] create log directory
+	+ RULES
+		[x] directory name: Logs
+		[x] make a log directory in the working directory if it doesn't already exist
+	+ TESTS
+		[x] log directory doesn't exist
+		[x] log directory exists
+[1] create log file
+	+ RULES
+		[x] log name: use script name
+		[x] create date time stamp
+		[x] use log directory
+		[x] append to, if log already exists
+	+ TESTS
+		[x] log file doesn't already exist
+		[x] log file exists						
+[] delete user
+	+ RULES
+		[x] write username to log
+		[x] delete crontabs
+		[x] kill all processes for user
+		[x] delete user
+	+ TESTS
+		[x] verify log
+		[x] verify command manually 
+		[x] verify command manually
+		[x] test grep pattern: dir: del-user-account
+
