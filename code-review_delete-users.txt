@@ -1,5 +1,4 @@
 # 	CODE REVIEW
-
 # Victor Solaris
 # November 18, 2020 
 # delete_user.sh
