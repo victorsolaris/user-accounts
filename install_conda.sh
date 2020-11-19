@@ -68,15 +68,15 @@ if [[ ! -f "/root/Downloads/$MINICONDAVERSION" ]]; then
 fi
 
 #	COPY MINICONDA TO USER
-for user in $(cut -f 1 -d : /etc/passwd | grep -e ^"$USERNAME*"); do
+for user in $(cut -f 1 -d : /etc/passwd | grep -w "$USERNAME[0-9]\+$"); do
   if [[ ! -f "/home/$user/$MINICONDAVERSION" ]]; then
-    cp "/root/Downloads/$MINICONDAVERSION" "/home/$user/" & 
+    cp "/root/Downloads/$MINICONDAVERSION" "/home/$user/" 
     echo -e "$MINICONDAVERSION copied to [ $user ]."
   fi;
 done | tee -a "$LOG"
 
 #	INSTALL MINICONDA
-for user in $(cut -f 1 -d : /etc/passwd | grep -e ^"$USERNAME*"); do
+for user in $(cut -f 1 -d : /etc/passwd | grep -w "$USERNAME[0-9]\+$"); do
   if [[ -f "/home/$user/$MINICONDAVERSION" ]]; then
     echo -e "Installing $MINICONDAVERSION to [ $user ]."
     runuser -l "$user" -c 'bash ~/Miniconda3-latest-Linux-x86_64.sh -b' > /dev/null 2>&1 &
