@@ -56,21 +56,41 @@ if ! [[ $MAX =~ $re2 ]]; then
   exit 1
 fi
 
+# find current directory
+CURRENTDIR=$(pwd)
+
+#       CREATE LOG DIRECTORY
+LOGDIR=""
+LOGDIREXISTS="$(echo -e "Log directory exists: [ $CURRENTDIR/Logs ]")"
+if [[ ! -d "$CURRENTDIR/Logs/" ]]; then
+  mkdir "$CURRENTDIR/Logs"
+  LOGDIR="$(echo -e "Log directory created: [ $CURRENTDIR/Logs/ ]")"
+fi
+
+#	CREATE DATE STAMP ON LOG
+LOG="$CURRENTDIR/Logs/$0.log"
+echo -e "\n***********************************************************************" | tee -a "$LOG"
+date | tee -a "$LOG"
+
 # CHECK IF THERE ARE ACCOUNTS TO BE DELETED
 totalaccounts="$(grep -wc "$USERNAME[0-9]*" "/etc/passwd")"
 if [[ $totalaccounts -eq 0 ]];then
-  echo -e "\nThere are $totalaccounts  account(s) to be deleted." 
+  echo -e "\nThere are $totalaccounts  account(s) to be deleted." | tee -a "$LOG"
   exit 1
 else
-  echo -e "\nDeleting $totalaccounts account(s). Please wait ...\n"
+  echo -e "\nDeleting $totalaccounts account(s). Please wait ...\n" | tee -a "$LOG"
 fi
+
 
 # DELETE USER ACCOUNTS
 for (( i=1; i <= MAX; i++  ));do
    if grep -wq "$USERNAME$i" /etc/passwd; then
-     
+    
+     # write name to log file
+     echo -e "Deleting [ $USERNAME$i ] ..." | tee -a "$LOG"
+	 
      # delete user crontabs
-     crontab -r -u "$USERNAME$i" > /dev/null 2&>1
+     crontab -r -u "$USERNAME$i" >/dev/null 2>&1
      
      # log out users
      killall -u "$USERNAME$i"
@@ -78,7 +98,7 @@ for (( i=1; i <= MAX; i++  ));do
      # delete user accounts
      /usr/sbin/userdel -r "$USERNAME$i"
      case $i in
-	$((MAX/10)) ) echo Completed: 10% ;;
+	$((MAX/10 * 1)) ) echo Completed: 10% ;;
 	$((MAX/10 * 2)) ) echo Completed: 20% ;;
 	$((MAX/10 * 3)) ) echo Completed: 30% ;;
 	$((MAX/10 * 4)) ) echo Completed: 40% ;;
@@ -96,14 +116,21 @@ for (( i=1; i <= MAX; i++  ));do
 done
 
 # DELETE GROUP
-echo -e "\n***** Remove Group **************************************\n"
+echo -e "\n***** Remove Group **************************************\n" | tee -a "$LOG"
 if grep -wq -1 "$GROUP" "/etc/group";then
   groupdel $GROUP
-  echo -e "Group deleted: $GROUP\n"
+  echo -e "Group deleted: $GROUP\n" | tee -a "$LOG"
 else
-  echo -e "Group does not exist: $GROUP\n"
+  echo -e "Group does not exist: $GROUP\n" | tee -a "$LOG"
 fi
 
 
 # DELETE ENCRYPTED USER ACCOUNTS/PASSWORD FILE 
 rm *.gpg 2>/dev/null
+
+#	SUMMARY
+echo -e "***** Summary **************************************\n" | tee -a "$LOG"
+date
+echo -e "\nUser accounts [ $USERNAME ] in /etc/passwd: $(grep -wc "$USERNAME[0-9]\+$" /etc/passwd)" | tee -a "$LOG"
+echo -e "Group [ $GROUP ] in /etc/group: $(grep -wc "$GROUP" /etc/group)" | tee -a "$LOG"
+echo -e "Encrypted user/password files in current directory:  $(find . -maxdepth 1 -type f -name "*.gpg" | wc -l)" | tee -a "$LOG"
