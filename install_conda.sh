@@ -45,10 +45,8 @@ if [[ ! $USERNAME =~ $re1 ]]; then
   exit 1
 fi
 
-# find current directory
-CURRENTDIR=$(pwd)
-
 #       CREATE LOG DIRECTORY
+CURRENTDIR=$(pwd)
 LOGDIR=""
 LOGDIREXISTS="$(echo -e "Log directory exists: [ $CURRENTDIR/Logs ]")"
 if [[ ! -d "$CURRENTDIR/Logs/" ]]; then
@@ -59,11 +57,10 @@ fi
 #       CREATE LOG FILE
 LOG="$CURRENTDIR/Logs/$0.log"
 MINICONDAVERSION="Miniconda3-latest-Linux-x86_64.sh"
-echo -e "" > "$LOG"
+echo -e "\n*************************************************************\n" | tee -a "$LOG"
+date | tee -a "$LOG"
 echo -e "\nCopying $MINICONDAVERSION to account(s). Please wait ...\n" | tee -a "$LOG"
 
-# 	DATE STAMP
-date | tee -a "$LOG"
 
 #	DOWNLOAD MINICONDA
 MINICONDALINK="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
