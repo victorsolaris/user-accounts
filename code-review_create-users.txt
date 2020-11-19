@@ -1,7 +1,10 @@
-# This is a checklist for testing the program features. 
+#	CODE REVIEW
+# Victor Solaris
+# November 18, 2020
 # create_user.sh
 
-# SUMMARY
+# 	SUMMARY
+# Progres [8/8]
 # - run as root [1]
 # - take command line arguments [1]
 # - create log directory [1]
@@ -11,8 +14,7 @@
 # - ecrypt file [1]
 # - create summary [1]
 
-# Progress [8/8]
-
+# 	CHECKLIST
 [1]run as root
 	+ RULES
 		[x] only root user can run this script
