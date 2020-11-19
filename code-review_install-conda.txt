@@ -4,15 +4,15 @@
 # install_conda.sh
 
 #	SUMMARY
-# Progress [4/8]
+# Progress [8/8]
 # - run as root [1]
 # - take command line arguments [1]
 # - create log directory [1]
 # - create log file [1]
-# - download miniconda []
-# - copy miniconda to user []
-# - install miniconda []
-# - update miniconda []
+# - download miniconda [1]
+# - copy miniconda to user [1]
+# - install miniconda [1]
+# - update miniconda [1]
 
 #	CHECKLIST
 [1] run as root
@@ -60,20 +60,34 @@
 	+ TESTS
 		[x] log file doesn't already exist
 		[x] log file exists
-# download miniconda
+[1] download miniconda
 	+ RULES
+		[x] download Miniconda3-latest-Linux-x86_64.sh
+		[x] directory: /root/Downloads/
+		[x] don't download if it already exists
 	+ TESTS
-
-# copy miniconda to user
+		[x] file exists
+		[x] file doesn't exist
+[1] copy miniconda to user
 	+ RULES
+		[x] copy Miniconda3-latest-Linux-x86_64.sh
+		[x] from /root/Downloads to users' home directory
+		[x] copy if it doesn't already exist
 	+ TESTS
-
-# install miniconda
+		[x] file exists
+		[x] file doesn't exist
+[1] install miniconda
 	+ RULES
+		[x] install miniconda
 	+ TESTS
-
-# update miniconda
+		[x] check version
+[1] update miniconda
 	+ RULES
+		[x] update miniconda
+		[x] add channel: bioconda
+		[x] add channel: conda-forge
 	+ TESTS
+		[x] verify version
+		[x] verify channels
 
 
