@@ -4,7 +4,7 @@
 # install_conda.sh
 
 #	SUMMARY
-# Progress [8/8]
+# Progress [7/7]
 # - run as root [1]
 # - take command line arguments [1]
 # - create log directory [1]
@@ -12,7 +12,6 @@
 # - download miniconda [1]
 # - copy miniconda to user [1]
 # - install miniconda [1]
-# - update miniconda [1]
 
 #	CHECKLIST
 [1] run as root
@@ -81,13 +80,5 @@
 		[x] install miniconda
 	+ TESTS
 		[x] check version
-[1] update miniconda
-	+ RULES
-		[x] update miniconda
-		[x] add channel: bioconda
-		[x] add channel: conda-forge
-	+ TESTS
-		[x] verify version
-		[x] verify channels
 
 
