@@ -1,7 +1,7 @@
 #	CODE REVIEW
 # Victor Solaris
 # November 18, 2020
-# install_conda.sh
+# update_conda.sh
 
 #	SUMMARY
 # Progress [5/5]
