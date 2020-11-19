@@ -28,11 +28,17 @@ README.md <br />
 2. take command line arguments
 3. create log directory
 4. create log file
-5. log file date stamp
-6. download miniconda
-7. copy miniconda to user
-8. install miniconda
-9. update miniconda
+5. download miniconda
+6. copy miniconda to user
+7. install miniconda
+
+## +++++ update.conda.sh +++++
+
+1. run as root
+2. take command line arguments
+3. create log directory
+4. create log file
+5. update conda
 
 ## ++++ delete_user.sh +++++
 
